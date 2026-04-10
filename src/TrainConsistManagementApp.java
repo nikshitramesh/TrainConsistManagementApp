@@ -15,7 +15,12 @@ public class TrainConsistManagementApp {
             this.capacity = capacity;
         }
 
-        // Display method
+        // Getter for grouping
+        String getName() {
+            return name;
+        }
+
+        // Display
         public String toString() {
             return name + " (Capacity: " + capacity + ")";
         }
@@ -26,33 +31,37 @@ public class TrainConsistManagementApp {
         // Step 1: Welcome Message
         System.out.println("=== Train Consist Management App ===");
 
-        // Step 2: Create List of Bogies (Reuse UC7 concept)
+        // Step 2: Create List of Bogies
         List<Bogie> bogieList = new ArrayList<>();
 
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 56));
+        bogieList.add(new Bogie("Sleeper", 72));   // duplicate type
         bogieList.add(new Bogie("First Class", 24));
-        bogieList.add(new Bogie("Second Sitting", 90));
+        bogieList.add(new Bogie("AC Chair", 56));  // duplicate type
 
-        // Step 3: Display All Bogies
-        System.out.println("\nAll Bogies:");
+        // Step 3: Display Original List
+        System.out.println("\nOriginal Bogie List:");
         for (Bogie b : bogieList) {
             System.out.println(b);
         }
 
-        // Step 4: Stream Filtering (Capacity > 60)
-        List<Bogie> filteredBogies = bogieList
+        // Step 4: Grouping using Stream API
+        Map<String, List<Bogie>> groupedBogies = bogieList
                 .stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(b -> b.getName()));
 
-        // Step 5: Display Filtered Bogies
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
-        for (Bogie b : filteredBogies) {
-            System.out.println(b);
+        // Step 5: Display Grouped Data
+        System.out.println("\nGrouped Bogies by Type:");
+
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("\nType: " + entry.getKey());
+            for (Bogie b : entry.getValue()) {
+                System.out.println("  " + b);
+            }
         }
 
         // Step 6: Continue Program
-        System.out.println("\nFiltering completed successfully...");
+        System.out.println("\nGrouping completed successfully...");
     }
 }
