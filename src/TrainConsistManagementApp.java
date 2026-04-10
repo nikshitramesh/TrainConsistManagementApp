@@ -8,37 +8,26 @@ public class TrainConsistManagementApp {
         // Step 1: Welcome Message
         System.out.println("=== Train Consist Management App ===");
 
-        // Step 2: Create LinkedList for Train Consist (Ordered Structure)
-        LinkedList<String> trainConsist = new LinkedList<>();
+        // Step 2: Create LinkedHashSet (Ordered + Unique)
+        Set<String> trainFormation = new LinkedHashSet<>();
 
-        // Step 3: Add Bogies (Initial Formation)
-        trainConsist.add("Engine");
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC");
-        trainConsist.add("Cargo");
-        trainConsist.add("Guard");
+        // Step 3: Add Bogies (Insertion Order Maintained)
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
 
-        System.out.println("\nInitial Train Consist:");
-        System.out.println(trainConsist);
+        // Step 4: Attempt Duplicate Insertion
+        trainFormation.add("Sleeper"); // duplicate (will be ignored)
 
-        // Step 4: Insert Pantry Car at position 2
-        trainConsist.add(2, "Pantry");
+        // Step 5: Display Final Formation
+        System.out.println("\nFinal Train Formation:");
+        System.out.println(trainFormation);
 
-        System.out.println("\nAfter adding Pantry Car at position 2:");
-        System.out.println(trainConsist);
-
-        // Step 5: Remove First and Last Bogie
-        trainConsist.removeFirst(); // removes Engine
-        trainConsist.removeLast();  // removes Guard
-
-        System.out.println("\nAfter removing first and last bogie:");
-        System.out.println(trainConsist);
-
-        // Step 6: Final Ordered Consist
-        System.out.println("\nFinal Train Consist (Ordered):");
-        System.out.println(trainConsist);
+        // Step 6: Show Count
+        System.out.println("\nTotal Bogies: " + trainFormation.size());
 
         // Step 7: Continue Program
-        System.out.println("\nTrain sequence maintained successfully...");
+        System.out.println("\nInsertion order preserved & duplicates prevented...");
     }
 }
