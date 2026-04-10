@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.*;
 
 // -------------------- Main Class --------------------
 public class TrainConsistManagementApp {
@@ -25,37 +26,33 @@ public class TrainConsistManagementApp {
         // Step 1: Welcome Message
         System.out.println("=== Train Consist Management App ===");
 
-        // Step 2: Create List of Bogies
+        // Step 2: Create List of Bogies (Reuse UC7 concept)
         List<Bogie> bogieList = new ArrayList<>();
 
-        // Step 3: Add Bogies
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 56));
         bogieList.add(new Bogie("First Class", 24));
+        bogieList.add(new Bogie("Second Sitting", 90));
 
-        System.out.println("\nBefore Sorting:");
+        // Step 3: Display All Bogies
+        System.out.println("\nAll Bogies:");
         for (Bogie b : bogieList) {
             System.out.println(b);
         }
 
-        // Step 4: Sort using Comparator (by capacity)
-        bogieList.sort(Comparator.comparingInt(b -> b.capacity));
+        // Step 4: Stream Filtering (Capacity > 60)
+        List<Bogie> filteredBogies = bogieList
+                .stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
 
-        // Step 5: Display Sorted Bogies
-        System.out.println("\nAfter Sorting by Capacity (Ascending):");
-        for (Bogie b : bogieList) {
+        // Step 5: Display Filtered Bogies
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+        for (Bogie b : filteredBogies) {
             System.out.println(b);
         }
 
-        // Step 6: Descending Order (optional for better understanding)
-        bogieList.sort((a, b) -> b.capacity - a.capacity);
-
-        System.out.println("\nAfter Sorting by Capacity (Descending):");
-        for (Bogie b : bogieList) {
-            System.out.println(b);
-        }
-
-        // Step 7: Continue Program
-        System.out.println("\nSorting completed successfully...");
+        // Step 6: Continue Program
+        System.out.println("\nFiltering completed successfully...");
     }
 }
