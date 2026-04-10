@@ -8,24 +8,37 @@ public class TrainConsistManagementApp {
         // Step 1: Welcome Message
         System.out.println("=== Train Consist Management App ===");
 
-        // Step 2: Create HashSet for Bogie IDs (Unique Storage)
-        Set<String> bogieIds = new HashSet<>();
+        // Step 2: Create LinkedList for Train Consist (Ordered Structure)
+        LinkedList<String> trainConsist = new LinkedList<>();
 
-        // Step 3: Add Bogie IDs (including duplicates)
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101"); // duplicate
-        bogieIds.add("BG102"); // duplicate
+        // Step 3: Add Bogies (Initial Formation)
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        // Step 4: Display Unique Bogie IDs
-        System.out.println("\nUnique Bogie IDs in Train:");
-        System.out.println(bogieIds);
+        System.out.println("\nInitial Train Consist:");
+        System.out.println(trainConsist);
 
-        // Step 5: Show Count
-        System.out.println("\nTotal Unique Bogies: " + bogieIds.size());
+        // Step 4: Insert Pantry Car at position 2
+        trainConsist.add(2, "Pantry");
 
-        // Step 6: Continue Program
-        System.out.println("\nSystem ensures no duplicate bogie IDs...");
+        System.out.println("\nAfter adding Pantry Car at position 2:");
+        System.out.println(trainConsist);
+
+        // Step 5: Remove First and Last Bogie
+        trainConsist.removeFirst(); // removes Engine
+        trainConsist.removeLast();  // removes Guard
+
+        System.out.println("\nAfter removing first and last bogie:");
+        System.out.println(trainConsist);
+
+        // Step 6: Final Ordered Consist
+        System.out.println("\nFinal Train Consist (Ordered):");
+        System.out.println(trainConsist);
+
+        // Step 7: Continue Program
+        System.out.println("\nTrain sequence maintained successfully...");
     }
 }
