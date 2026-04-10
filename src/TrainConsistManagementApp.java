@@ -15,12 +15,6 @@ public class TrainConsistManagementApp {
             this.capacity = capacity;
         }
 
-        // Getter for grouping
-        String getName() {
-            return name;
-        }
-
-        // Display
         public String toString() {
             return name + " (Capacity: " + capacity + ")";
         }
@@ -36,32 +30,25 @@ public class TrainConsistManagementApp {
 
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 56));
-        bogieList.add(new Bogie("Sleeper", 72));   // duplicate type
         bogieList.add(new Bogie("First Class", 24));
-        bogieList.add(new Bogie("AC Chair", 56));  // duplicate type
+        bogieList.add(new Bogie("Second Sitting", 90));
 
-        // Step 3: Display Original List
-        System.out.println("\nOriginal Bogie List:");
+        // Step 3: Display Bogies
+        System.out.println("\nBogie List:");
         for (Bogie b : bogieList) {
             System.out.println(b);
         }
 
-        // Step 4: Grouping using Stream API
-        Map<String, List<Bogie>> groupedBogies = bogieList
+        // Step 4: Stream Aggregation (Total Capacity)
+        int totalCapacity = bogieList
                 .stream()
-                .collect(Collectors.groupingBy(b -> b.getName()));
+                .map(b -> b.capacity)        // Extract capacity
+                .reduce(0, Integer::sum);   // Sum all values
 
-        // Step 5: Display Grouped Data
-        System.out.println("\nGrouped Bogies by Type:");
-
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println("\nType: " + entry.getKey());
-            for (Bogie b : entry.getValue()) {
-                System.out.println("  " + b);
-            }
-        }
+        // Step 5: Display Total
+        System.out.println("\nTotal Seating Capacity: " + totalCapacity);
 
         // Step 6: Continue Program
-        System.out.println("\nGrouping completed successfully...");
+        System.out.println("\nAggregation completed successfully...");
     }
 }
